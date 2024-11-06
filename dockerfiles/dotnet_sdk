@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0
+FROM --platform=i386 i386/debian:buster
 ARG DEBIAN_FRONTEND=noninteractive
 
 ARG TERRAFORM_VERSION=1.5.7
@@ -8,11 +8,15 @@ ARG TFSEC_VERSION=1.28.5
 ARG TERRAFORM_DOCS_VERSION=0.17.0
 
 RUN apt-get clean && apt-get update && apt-get -y upgrade
+RUN ./dotnet-install.sh --channel 8.0
+RUN rm ./dotnet-install.sh
 
 # Install dependencies
 # RUN apt-get install --no-install-recommends -y software-properties-common curl wget unzip make git jq gh git-lfs ssh libxml2-utils
 
 RUN apt-get install --no-install-recommends -y curl wget unzip make git jq gh git-lfs ssh libxml2-utils
+
+RUN wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
 
 # Terraform
 RUN wget "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip" \
