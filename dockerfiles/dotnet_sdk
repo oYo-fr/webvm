@@ -45,7 +45,7 @@ RUN curl -fsSL https://docs.grit.io/install | bash
 
 RUN dotnet tool install -g dnt
 
-RUN ssh-keyscan github.com >> ~/.ssh/known_hosts
+# RUN ssh-keyscan github.com >> ~/.ssh/known_hosts
 
 RUN useradd -m user && echo "user:password" | chpasswd
 
