@@ -11,7 +11,7 @@ on:
         type: string
         description: 'Path to the Dockerfile'
         required: true
-        default: 'dockerfiles/dotnet_sdk'
+        default: 'dockerfiles/debian_mini'
 
       IMAGE_SIZE:
         type: string
@@ -113,7 +113,7 @@ jobs:
       - run: sudo mkdir -p $DEPLOY_DIR
 
       # Build the i386 Dockerfile image.
-      - run: docker build . --tag $TAG --file ${{ github.event.inputs.DOCKERFILE_PATH }} # --platform=i386
+      - run: docker build . --tag $TAG --file ${{ github.event.inputs.DOCKERFILE_PATH }} --platform=i386
 
       # Run the docker image so that we can export the container.
       # Run the Docker container with the Google Public DNS nameservers: 8.8.8.8, 8.8.4.4
