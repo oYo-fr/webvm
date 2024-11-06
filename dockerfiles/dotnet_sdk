@@ -1,60 +1,79 @@
+# FROM ubuntu
+# ARG DEBIAN_FRONTEND=noninteractive
+
+# ARG TERRAFORM_VERSION=1.5.7
+# ARG TERRAGRUNT_VERSION=0.54.21
+# ARG TFLINT_VERSION=0.50.2
+# ARG TFSEC_VERSION=1.28.5
+# ARG TERRAFORM_DOCS_VERSION=0.17.0
+
+# RUN apt-get clean && apt-get update && apt-get -y upgrade
+
+# # Install dependencies
+# # RUN apt-get install --no-install-recommends -y software-properties-common curl wget unzip make git jq gh git-lfs ssh libxml2-utils
+
+# RUN apt-get install --no-install-recommends -y curl wget unzip make git jq git-lfs ssh libxml2-utils # gh
+
+# RUN apt-get install -y ca-certificates
+# RUN wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh #  --no-check-certificate
+# RUN chmod +x ./dotnet-install.sh
+# RUN ./dotnet-install.sh --channel 8.0
+# RUN rm ./dotnet-install.sh
+
+# # Terraform
+# RUN wget "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip" \
+#     && unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
+#     && mv terraform /usr/local/bin/ \
+#     && rm terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+
+# # Tflint
+# RUN wget "https://github.com/wata727/tflint/releases/download/v${TFLINT_VERSION}/tflint_linux_amd64.zip" -O /tmp/tflint.zip \
+#     && unzip /tmp/tflint.zip -d /usr/local/bin/ \
+#     && rm -f /tmp/tflint.zip
+
+# # Terragrunt
+# RUN wget "https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64" -O /usr/local/bin/terragrunt \
+#     && chmod +x /usr/local/bin/terragrunt
+
+# # Tfsec
+# RUN wget "https://github.com/aquasecurity/tfsec/releases/download/v${TFSEC_VERSION}/tfsec-linux-amd64" -O /usr/local/bin/tfsec \
+# 	&& chmod +x /usr/local/bin/tfsec
+
+# #TFDocs
+# RUN curl -sSLo ./terraform-docs.tar.gz "https://terraform-docs.io/dl/v${TERRAFORM_DOCS_VERSION}/terraform-docs-v${TERRAFORM_DOCS_VERSION}-linux-amd64.tar.gz" \
+#     && tar -xzf terraform-docs.tar.gz \
+#     && chmod +x terraform-docs \
+#     && mv terraform-docs /usr/local/bin/terraform-docs \
+#     && rm ./terraform-docs.tar.gz
+
+# #Gritql
+# RUN curl -fsSL https://docs.grit.io/install | bash
+
+# # RUN dotnet tool install -g dnt
+
+# # RUN ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+# RUN useradd -m user && echo "user:password" | chpasswd
+
+# # We set WORKDIR, as this gets extracted by Webvm to be used as the cwd. This is optional.
+# WORKDIR /home/user/
+# # We set env, as this gets extracted by Webvm. This is optional.
+# ENV HOME="/home/user" TERM="xterm" USER="user" SHELL="/bin/bash" EDITOR="vim" LANG="en_US.UTF-8" LC_ALL="C"
+# RUN echo 'root:password' | chpasswd
+# CMD [ "/bin/bash" ]
+
 FROM ubuntu
 ARG DEBIAN_FRONTEND=noninteractive
-
-ARG TERRAFORM_VERSION=1.5.7
-ARG TERRAGRUNT_VERSION=0.54.21
-ARG TFLINT_VERSION=0.50.2
-ARG TFSEC_VERSION=1.28.5
-ARG TERRAFORM_DOCS_VERSION=0.17.0
-
 RUN apt-get clean && apt-get update && apt-get -y upgrade
-
-# Install dependencies
-# RUN apt-get install --no-install-recommends -y software-properties-common curl wget unzip make git jq gh git-lfs ssh libxml2-utils
-
-RUN apt-get install --no-install-recommends -y curl wget unzip make git jq git-lfs ssh libxml2-utils # gh
-
-RUN apt-get install -y ca-certificates
-RUN wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh #  --no-check-certificate
-RUN chmod +x ./dotnet-install.sh
-RUN ./dotnet-install.sh --channel 8.0
-RUN rm ./dotnet-install.sh
-
-# Terraform
-RUN wget "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip" \
-    && unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
-    && mv terraform /usr/local/bin/ \
-    && rm terraform_${TERRAFORM_VERSION}_linux_amd64.zip
-
-# Tflint
-RUN wget "https://github.com/wata727/tflint/releases/download/v${TFLINT_VERSION}/tflint_linux_amd64.zip" -O /tmp/tflint.zip \
-    && unzip /tmp/tflint.zip -d /usr/local/bin/ \
-    && rm -f /tmp/tflint.zip
-
-# Terragrunt
-RUN wget "https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64" -O /usr/local/bin/terragrunt \
-    && chmod +x /usr/local/bin/terragrunt
-
-# Tfsec
-RUN wget "https://github.com/aquasecurity/tfsec/releases/download/v${TFSEC_VERSION}/tfsec-linux-amd64" -O /usr/local/bin/tfsec \
-	&& chmod +x /usr/local/bin/tfsec
-
-#TFDocs
-RUN curl -sSLo ./terraform-docs.tar.gz "https://terraform-docs.io/dl/v${TERRAFORM_DOCS_VERSION}/terraform-docs-v${TERRAFORM_DOCS_VERSION}-linux-amd64.tar.gz" \
-    && tar -xzf terraform-docs.tar.gz \
-    && chmod +x terraform-docs \
-    && mv terraform-docs /usr/local/bin/terraform-docs \
-    && rm ./terraform-docs.tar.gz
-
-#Gritql
-RUN curl -fsSL https://docs.grit.io/install | bash
-
-# RUN dotnet tool install -g dnt
-
-# RUN ssh-keyscan github.com >> ~/.ssh/known_hosts
-
+RUN apt-get -y install apt-utils gcc \
+	python3 vim unzip ruby nodejs \
+	fakeroot dbus base whiptail hexedit \
+	patch wamerican ucf manpages \
+	file luajit make lua50 dialog curl \
+	less cowsay netcat-openbsd
 RUN useradd -m user && echo "user:password" | chpasswd
-
+COPY --chown=user:user ./examples /home/user/examples
+RUN chmod -R +x  /home/user/examples/lua
 # We set WORKDIR, as this gets extracted by Webvm to be used as the cwd. This is optional.
 WORKDIR /home/user/
 # We set env, as this gets extracted by Webvm. This is optional.
