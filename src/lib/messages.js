@@ -18,7 +18,7 @@ export const introMessage = [
 	"|                                                                             |",
 	"+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+",
 	"",
-	"   Welcome to WebVM. If unsure, try these examples:",
+	"   Welcome to WebVM dotnet. If unsure, try these examples:",
 	"",
 	"     python3 examples/python3/fibonacci.py ",
 	"     gcc -o helloworld examples/c/helloworld.c && ./helloworld",
