@@ -2,22 +2,6 @@ const color= "\x1b[1;35m";
 const underline= "\x1b[94;4m";
 const normal= "\x1b[0m";
 export const introMessage = [
-	"+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+",
-	"|                                                                             |",
-	"| WebVM is a virtual Linux environment running in the browser via WebAssembly |",
-	"|                                                                             |",
-	"| WebVM is powered by the CheerpX virtualization engine, which enables safe,  |",
-	"| sandboxed client-side execution of x86 binaries, fully client-side          |",
-	"|                                                                             |",
-	"| CheerpX includes an x86-to-WebAssembly JIT compiler, a virtual block-based  |",
-	"| file system, and a Linux syscall emulator                                   |",
-	"|                                                                             |",
-	"| Your own WebVM with custom images via Dockerfile:                           |",
-	"|                                                                             |",
-	"| " + underline + "https://leaningtech.com/mini-webvm-your-linux-box-from-dockerfile-via-wasm" + normal +"  |",
-	"|                                                                             |",
-	"+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+",
-	"",
 	"   Welcome to WebVM dotnet. If unsure, try these examples:",
 	"",
 	"     python3 examples/python3/fibonacci.py ",
