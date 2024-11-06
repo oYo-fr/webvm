@@ -7,45 +7,45 @@ ARG TFLINT_VERSION=0.50.2
 ARG TFSEC_VERSION=1.28.5
 ARG TERRAFORM_DOCS_VERSION=0.17.0
 
-RUN apt-get clean && apt-get update && apt-get -y upgrade
+# RUN apt-get clean && apt-get update && apt-get -y upgrade
 
-# Install dependencies
-RUN apt-get update \
-    && DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y \
-    && DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y software-properties-common curl wget unzip make git jq gh git-lfs ssh libxml2-utils
+# # Install dependencies
+# RUN apt-get update \
+#     && DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y \
+#     && DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y software-properties-common curl wget unzip make git jq gh git-lfs ssh libxml2-utils
 
-# Terraform
-RUN wget "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip" \
-    && unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
-    && mv terraform /usr/local/bin/ \
-    && rm terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+# # Terraform
+# RUN wget "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip" \
+#     && unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
+#     && mv terraform /usr/local/bin/ \
+#     && rm terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 
-# Tflint
-RUN wget "https://github.com/wata727/tflint/releases/download/v${TFLINT_VERSION}/tflint_linux_amd64.zip" -O /tmp/tflint.zip \
-    && unzip /tmp/tflint.zip -d /usr/local/bin/ \
-    && rm -f /tmp/tflint.zip
+# # Tflint
+# RUN wget "https://github.com/wata727/tflint/releases/download/v${TFLINT_VERSION}/tflint_linux_amd64.zip" -O /tmp/tflint.zip \
+#     && unzip /tmp/tflint.zip -d /usr/local/bin/ \
+#     && rm -f /tmp/tflint.zip
 
-# Terragrunt
-RUN wget "https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64" -O /usr/local/bin/terragrunt \
-    && chmod +x /usr/local/bin/terragrunt
+# # Terragrunt
+# RUN wget "https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64" -O /usr/local/bin/terragrunt \
+#     && chmod +x /usr/local/bin/terragrunt
 
-# Tfsec
-RUN wget "https://github.com/aquasecurity/tfsec/releases/download/v${TFSEC_VERSION}/tfsec-linux-amd64" -O /usr/local/bin/tfsec \
-	&& chmod +x /usr/local/bin/tfsec
+# # Tfsec
+# RUN wget "https://github.com/aquasecurity/tfsec/releases/download/v${TFSEC_VERSION}/tfsec-linux-amd64" -O /usr/local/bin/tfsec \
+# 	&& chmod +x /usr/local/bin/tfsec
 
-#TFDocs
-RUN curl -sSLo ./terraform-docs.tar.gz "https://terraform-docs.io/dl/v${TERRAFORM_DOCS_VERSION}/terraform-docs-v${TERRAFORM_DOCS_VERSION}-linux-amd64.tar.gz" \
-    && tar -xzf terraform-docs.tar.gz \
-    && chmod +x terraform-docs \
-    && mv terraform-docs /usr/local/bin/terraform-docs \
-    && rm ./terraform-docs.tar.gz
+# #TFDocs
+# RUN curl -sSLo ./terraform-docs.tar.gz "https://terraform-docs.io/dl/v${TERRAFORM_DOCS_VERSION}/terraform-docs-v${TERRAFORM_DOCS_VERSION}-linux-amd64.tar.gz" \
+#     && tar -xzf terraform-docs.tar.gz \
+#     && chmod +x terraform-docs \
+#     && mv terraform-docs /usr/local/bin/terraform-docs \
+#     && rm ./terraform-docs.tar.gz
 
-#Gritql
-RUN curl -fsSL https://docs.grit.io/install | bash
+# #Gritql
+# RUN curl -fsSL https://docs.grit.io/install | bash
 
-RUN dotnet tool install -g dnt
+# RUN dotnet tool install -g dnt
 
-RUN ssh-keyscan github.com >> ~/.ssh/known_hosts
+# RUN ssh-keyscan github.com >> ~/.ssh/known_hosts
 
 RUN useradd -m user && echo "user:password" | chpasswd
 
