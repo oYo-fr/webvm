@@ -15,7 +15,7 @@ RUN apt-get clean && apt-get update && apt-get -y upgrade
 RUN apt-get install --no-install-recommends -y curl wget unzip make git jq git-lfs ssh libxml2-utils # gh
 
 RUN apt-get install -y ca-certificates
-RUN wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
+RUN wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh #  --no-check-certificate
 RUN chmod +x ./dotnet-install.sh
 RUN ./dotnet-install.sh --channel 8.0
 RUN rm ./dotnet-install.sh
@@ -49,7 +49,7 @@ RUN curl -sSLo ./terraform-docs.tar.gz "https://terraform-docs.io/dl/v${TERRAFOR
 #Gritql
 RUN curl -fsSL https://docs.grit.io/install | bash
 
-RUN dotnet tool install -g dnt
+# RUN dotnet tool install -g dnt
 
 # RUN ssh-keyscan github.com >> ~/.ssh/known_hosts
 
