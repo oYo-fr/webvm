@@ -14,7 +14,7 @@ RUN apt-get clean && apt-get update && apt-get -y upgrade
 
 RUN apt-get install --no-install-recommends -y curl wget unzip make git jq git-lfs ssh libxml2-utils # gh
 
-RUN apt-get install ca-certificates
+RUN apt-get install -y ca-certificates
 RUN wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
 RUN chmod +x ./dotnet-install.sh
 RUN ./dotnet-install.sh --channel 8.0
